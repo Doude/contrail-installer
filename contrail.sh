@@ -323,6 +323,7 @@ function download_dependencies {
             apt_get install libipfix-dev
             apt_get install python-docker-py
             download_cassandra_cpp_drivers
+            apt_get install libzookeeper-mt-dev
         fi	
         apt_get install libvirt-bin
         apt_get install python-neutron
