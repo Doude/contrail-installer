@@ -60,7 +60,9 @@ function neutron_plugin_check_adv_test_requirements() {
 }
 
 function neutron_plugin_create_nova_conf {
-    iniset $NOVA_CONF DEFAULT network_api_class nova_contrail_vif.contrailvif.ContrailNetworkAPI
+    if ! python -c "import nova.network.model as nova_network; exit(0) if hasattr(nova_network, 'VIF_TYPE_VROUTER') else exit(1)"; then
+        iniset $NOVA_CONF DEFAULT network_api_class nova_contrail_vif.contrailvif.ContrailNetworkAPI
+    fi
 }
 
 # Restore xtrace
